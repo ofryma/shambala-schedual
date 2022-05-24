@@ -1,0 +1,149 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Verdana, sans-serif;
+  align-items: center;
+}
+
+
+/* Month header */
+.month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #94b29f;
+  text-align: center;
+  background-image: url('https://scontent.ftlv10-1.fna.fbcdn.net/v/t39.30808-6/279798893_155308036981740_8830816604358235376_n.png?_nc_cat=102&ccb=1-7&_nc_sid=e3f864&_nc_ohc=35M5i-QmNvUAX_-V2SN&_nc_ht=scontent.ftlv10-1.fna&oh=00_AT_m5mX-Xsb5Cu9qcQnIeGJUeIqcdbYmHNOK401nnbz9kw&oe=62929F3E');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 70% 100%;
+  background-position: center;
+}
+
+.calender{
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+/* Month list */
+.month ul {
+  margin: 7px;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#ddd;
+}
+
+.hours li {
+  font-size: 80%;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+/* .days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 14.28%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+} */
+
+/* Highlight the "current" day */
+.active {
+  padding: 5px;
+  background: #94b29f;
+  color: #94b29f !important
+}
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  display: inline;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.hidden{
+  display: none;
+}
+
+.available{
+  color: green;
+}

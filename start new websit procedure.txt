@@ -1,0 +1,35 @@
+1. open new folder with the name of the project
+2. create all the files needed: app.js , index.html...
+3. create file for deploying the site: touch Procfile
+3*. inside the Procfile: web: node app.js
+4.open subdiractory called: "public". Inside open folder for the css files and images
+5. npm init
+6. npm install body-parser express request
+7. open the project in atom, the command is: atom .
+
+
+inside the JS file at the top:
+//********
+const express = require("express");
+const https = require("https");
+const request = require("request");
+const bodyParser = require("body-parser");
+
+const app = express();
+app.use(bodyParser.urlencoded({extended: true}));
+//*******
+
+for Running the site while working on it use command: run server: nodemon app.js
+
+FINAL STEPS after writing the site
+
+
+
+8. navigate with the console to the project folder
+git:
+	1. use the command: git init
+	2. git add .
+	3. git commit -m "your msg"
+9. create a new server and give an address for it, for creating the server use command: heroku create
+10. to upload the diractory files use command: git push heroku master
+10*. every time there is an update, follow steps 8.2 and 8.3 to update the git files and than step 9 to upload the update

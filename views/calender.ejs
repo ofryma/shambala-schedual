@@ -1,0 +1,151 @@
+<div class="calender">
+
+  <div class="month">
+    <ul>
+      <!-- <li class="prev">&#10094;</li>
+      <li class="next">&#10095;</li> -->
+      <li><%= Today.monthName %><br><span style="font-size:18px">2022</span></li>
+    </ul>
+  </div>
+
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Su</th>
+      <th scope="col">Mo</th>
+      <th scope="col">Tu</th>
+      <th scope="col">We</th>
+      <th scope="col">Th</th>
+      <th scope="col">Fr</th>
+      <th scope="col">Sa</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+
+    <%let count = 0 ;%>
+    <%for(let i = 0 ; i < Today.firstDayOfMonth ; i++){%>
+      <th class="days"></th>
+      <%count++;%>
+
+    <%}%>
+    <% for(let i = 1 ; i < Today.daysInThisMonth + 1 ; i++){ %>
+
+        <%if(count==7){%>
+          <%count=0%>
+        <%}%>
+        <%if(count==0){%>
+          </tr>
+          <tr>
+        <%}%>
+
+
+
+        <%if(count==1){%>
+          <th class="days"><%=i%><div class="hours">
+            <ul>
+              <li class="op">10:00</li>
+              <li class="op">11:00</li>
+              <li class="op">12:00</li>
+              <li class="op">13:00</li>
+            </ul>
+          </div></th>
+        <%}else if(count==3){%>
+          <th class="days"><%=i%><div class="hours">
+            <ul>
+              <li class="op">16:00</li>
+              <li class="op">17:00</li>
+              <li class="op">18:00</li>
+              <li class="op">19:00</li>
+            </ul>
+          </div></th>
+        <%}else if(count==5){%>
+          <th class="days"><%=i%><div class="hours">
+            <ul>
+              <li class="op">10:00</li>
+              <li class="op">11:00</li>
+              <li class="op">12:00</li>
+              <li class="op">13:00</li>
+            </ul>
+          </div></th>
+        <%}else{%>
+          <th class="days"><%=i%></th>
+        <%}%>
+
+        <%count++%>
+    <%}%>
+
+    </tr>
+
+
+  </tbody>
+  </table>
+
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+  function exDate(str){
+    let numbers = '0123456789';
+    if(numbers.includes(str[1])){
+      return '' + str[0] + str [1];
+    }
+    else{
+      return '' + str[0];
+    }
+
+  }
+
+  async function openForm(title){
+    const { value: name } = await Swal.fire({
+    title: title,
+    input: 'text',
+    inputLabel: 'Your Name',
+    inputPlaceholder: 'Full Name'
+  })
+  //
+  // const { value: email } = await Swal.fire({
+  // title: 'Contact',
+  // input: 'email',
+  // inputLabel: 'Your email address',
+  // inputPlaceholder: 'Enter your email address'
+  // })
+  //
+  // const { value: phone } = await Swal.fire({
+  // title: 'Contact',
+  // input: 'text',
+  // inputLabel: 'Your phone number',
+  // inputPlaceholder: 'Enter your phone number'
+  // })
+
+
+
+  }
+  var items = document.getElementsByClassName("op");
+  for(let i =0 ; i < items.length; i++){
+    let item = items[i];
+    item.addEventListener("click" , function(){
+      let date = exDate(item.parentElement.parentElement.parentElement.innerText);
+      let title = '' + 'May ' + date + ', ' + item.innerHTML;
+      openForm(title);
+
+    });
+
+    item.addEventListener("mouseover" , function(){
+      
+    });
+
+  }
+
+
+
+
+</script>
