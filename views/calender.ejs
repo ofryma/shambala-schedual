@@ -1,81 +1,18 @@
 <div class="calender">
 
   <div class="month">
-    <ul>
-      <!-- <li class="prev">&#10094;</li>
-      <li class="next">&#10095;</li> -->
-      <li><%= Today.monthName %><br><span style="font-size:18px">2022</span></li>
-    </ul>
+    <h1><%= Today.monthName %><br><span style="font-size:18px">2022</span></h1>
   </div>
 
-
   <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Su</th>
-      <th scope="col">Mo</th>
-      <th scope="col">Tu</th>
-      <th scope="col">We</th>
-      <th scope="col">Th</th>
-      <th scope="col">Fr</th>
-      <th scope="col">Sa</th>
-    </tr>
-  </thead>
+      <%- include('tablehead') -%>
   <tbody>
 
     <tr>
 
-    <%let count = 0 ;%>
-    <%for(let i = 0 ; i < Today.firstDayOfMonth ; i++){%>
-      <th class="days"></th>
-      <%count++;%>
 
-    <%}%>
-    <% for(let i = 1 ; i < Today.daysInThisMonth + 1 ; i++){ %>
+        <%- include('day') -%>
 
-        <%if(count==7){%>
-          <%count=0%>
-        <%}%>
-        <%if(count==0){%>
-          </tr>
-          <tr>
-        <%}%>
-
-
-
-        <%if(count==1){%>
-          <th class="days"><%=i%><div class="hours">
-            <ul>
-              <li class="op">10:00</li>
-              <li class="op">11:00</li>
-              <li class="op">12:00</li>
-              <li class="op">13:00</li>
-            </ul>
-          </div></th>
-        <%}else if(count==3){%>
-          <th class="days"><%=i%><div class="hours">
-            <ul>
-              <li class="op">16:00</li>
-              <li class="op">17:00</li>
-              <li class="op">18:00</li>
-              <li class="op">19:00</li>
-            </ul>
-          </div></th>
-        <%}else if(count==5){%>
-          <th class="days"><%=i%><div class="hours">
-            <ul>
-              <li class="op">10:00</li>
-              <li class="op">11:00</li>
-              <li class="op">12:00</li>
-              <li class="op">13:00</li>
-            </ul>
-          </div></th>
-        <%}else{%>
-          <th class="days"><%=i%></th>
-        <%}%>
-
-        <%count++%>
-    <%}%>
 
     </tr>
 
@@ -87,65 +24,29 @@
 
 </div>
 
+<script src="scripts/signform.js" charset="utf-8"></script>
 
 
+<div id='main-form' class="hidden">
+
+  <form class="" action="/" method="post">
+    <input type="text" name="name" value="" placeholder="Full Name">
+    <input type="text" name="phone" value="" placeholder="Phone Number">
+    <input type="text" name="dayNumber" value="6">
+    <input type="text" name="month" value="<%= Today.monthName %>">
+    <input type="text" name="day" value="">
+
+    <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
+
+       <option>10:00</option>
+       <option>10:30</option>
+       <option>11:00</option>
+
+   </select>
 
 
-<script type="text/javascript">
+    <button type="submit" name="submit">Send</button>
 
-  function exDate(str){
-    let numbers = '0123456789';
-    if(numbers.includes(str[1])){
-      return '' + str[0] + str [1];
-    }
-    else{
-      return '' + str[0];
-    }
+  </form>
 
-  }
-
-  async function openForm(title){
-    const { value: name } = await Swal.fire({
-    title: title,
-    input: 'text',
-    inputLabel: 'Your Name',
-    inputPlaceholder: 'Full Name'
-  })
-  //
-  // const { value: email } = await Swal.fire({
-  // title: 'Contact',
-  // input: 'email',
-  // inputLabel: 'Your email address',
-  // inputPlaceholder: 'Enter your email address'
-  // })
-  //
-  // const { value: phone } = await Swal.fire({
-  // title: 'Contact',
-  // input: 'text',
-  // inputLabel: 'Your phone number',
-  // inputPlaceholder: 'Enter your phone number'
-  // })
-
-
-
-  }
-  var items = document.getElementsByClassName("op");
-  for(let i =0 ; i < items.length; i++){
-    let item = items[i];
-    item.addEventListener("click" , function(){
-      let date = exDate(item.parentElement.parentElement.parentElement.innerText);
-      let title = '' + 'May ' + date + ', ' + item.innerHTML;
-      openForm(title);
-
-    });
-
-    item.addEventListener("mouseover" , function(){
-      
-    });
-
-  }
-
-
-
-
-</script>
+</div>

@@ -1,0 +1,29 @@
+
+
+
+    <%let count = 0 ;%>
+    <%for(let i = 0 ; i < Today.firstDayOfMonth ; i++){%>
+      <th class=""></th>
+      <%count++;%>
+
+    <%}%>
+
+
+    <% for(let i = 1 ; i < Today.daysInThisMonth + 1 ; i++){ %>
+
+        <%if(count==7){%>
+          <%count=0%>
+        <%}%>
+        <%if(count==0){%>
+          </tr>
+          <tr>
+        <%}%>
+
+        <div class="day-container">
+            <th class=""><h4 class="days" href=""><%=i%></h4></th>
+        </div>
+
+
+
+        <%count++%>
+    <%}%>
