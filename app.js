@@ -10,6 +10,21 @@ const app = express();
 app.set('view engine', 'ejs');
 const d = new Date();
 
+function getTodayData(){
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const d = new Date();
+  let this_month = month[d.getMonth()];
+  let this_day = weekday[d.getDay()];
+  let this_year = String(d.getFullYear());
+
+  let today = {
+    day: this_day,
+    month: this_month,
+    year: this_year
+  }
+  return today
+}
 function mktohour(hour , min){
   let n_hour = '';
   let n_min = '';
@@ -51,9 +66,16 @@ function openMonth(monthNumber){
     }
   })
 }
+async function deleteByDate(d_day,d_month){
+  Schedual.deleteOne({date: {number: d_day , month: d_month}}, function(err){
+    if(err){console.log(err);}
+  })
+}
 async function findandprint(){
-  let docs =  await Schedual.find({}).exec();
-  console.log(docs);
+  let docs =  await Reserv.find({}).exec();
+  docs.forEach(function(doc){
+    console.log(doc);
+  })
 }
 async function setReservation(info){
   let schedual =  await Schedual.find({}).exec();
@@ -94,94 +116,72 @@ app.use(bodyParser.urlencoded({extended: true}));
 const database_name = "reservDB";
 mongoose.connect('mongodb://localhost:27017/' + database_name);
 
-const monthSchema = new mongoose.Schema({
-  _id: String,
-  date: {
-    number: String,
-    month: String,
-  },
-  dayName: String,
-  appointments: [
-    {
-      hour: Number,
-      min: Number,
-      available: Boolean,
-      reserv_id: String
-    }
-  ]
-});
-const Schedual = mongoose.model('Schedual', monthSchema);
+// const monthSchema = new mongoose.Schema({
+//   day: String,
+//   hours: [String]
+// });
+// const Schedual = mongoose.model('Schedual', monthSchema);
 const reservSchema = new mongoose.Schema({
-  _id: String,
-  name: String,
-  phone: String
+  name: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  day: {
+    type: String,
+    required: true
+  },
+  dayNumber: {
+    type: String,
+    required: true
+  },
+  month: {
+    type: String,
+    required: true
+  },
+  hour: {
+    type: String,
+    required: true
+  }
 });
 // reservSchema.plugin(encrypt,{secret: process.env.SECRET , encryptedFields: ["password"]});
 const Reserv = mongoose.model('Reservation', reservSchema);
 
 
 
-var day = new Schedual({
-  _id: '1',
-  date: {
-    number: '6',
-    month: 'June'
-  },
-  dayName: 'Monday',
-  appointments: [
-    {
-      hour: 10,
-      min: 00,
-      available: true
-    },
-    {
-      hour: 10,
-      min: 30,
-      available: false
-    },
-    {
-      hour: 11,
-      min: 30,
-      available: true
-    }
-  ]
-
-}
-);
-
-
+// var day = new Schedual({
+//   day: 'Monday',
+//   hours: ['10:30' , '11:00' , '11:30']
+// }
+// );
 
 // day.save(function(err , res){
 //   if(err){
 //     console.log(err);
 //   }
-//   console.log(res);
 // })
-
-
-
-
 
 
 
 
 app.route('/')
   .get(async function(req,res){
+    findandprint();
+    let d = new Date();
+    let today_data = getTodayData()
+    let monthNumber =d.getMonth();
 
-    // findandprint();
-
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const d = new Date();
-    let monthNumber = d.getMonth();
     let today = {
-      dayName: weekday[d.getDay()],
+      dayName: today_data.day,
       dayInWeek: d.getDay(),
       todayDate: d.getDate(),
 
 
       monthNumber: monthNumber,
-      monthName: month[monthNumber],
+      monthName: today_data.month,
 
       daysInThisMonth: getDaysInMonth(monthNumber),
       daysInNextMonth: getDaysInMonth(monthNumber + 1),
@@ -191,24 +191,30 @@ app.route('/')
 
 
 
-    let docs =  await Schedual.find({}).exec();
-    console.log(docs[0]);
-    res.render("index",{Today: today , Docs: docs});
+    // let docs =  await Schedual.find({}).exec();
+    res.render("index",{Today: today});
   })
   .post(async function(req,res){
     let info = req.body;
-    var new_reservation = new Reserv({
-      _id: String(Math.floor(Math.random() * 10000000)),
+    // console.log(info);
+
+    var reservation = new Reserv({
       name: info.name,
-      phone: info.phone
+      phone: info.phone,
+      day: info.day,
+      dayNumber: info.dayNumber,
+      month: info.month,
+      hour: info.hour
     });
-    console.log(info);
-    // new_reservation.save(function(err,result){
-    //   if(err){console.log(err);}
-    // });
 
-    setReservation(info);
-
+    reservation.save(function(err,result){
+      if(err){
+        console.log('משהו קרה, הרישום לא הושלם בהצלחה' , err);
+      }
+      else{
+        console.log('הרישום בוצע בהצלחה');
+      }
+    });
     res.redirect('/');
   });
 

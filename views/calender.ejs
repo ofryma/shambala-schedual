@@ -32,15 +32,14 @@
   <form class="" action="/" method="post">
     <input type="text" name="name" value="" placeholder="Full Name">
     <input type="text" name="phone" value="" placeholder="Phone Number">
-    <input type="text" name="dayNumber" value="6">
+    <input id="dayNumber" type="text" name="dayNumber" value="">
     <input type="text" name="month" value="<%= Today.monthName %>">
-    <input type="text" name="day" value="">
+    <input id="dayName" type="text" name="day" value="">
 
-    <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
+    <select id="hour-select" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
 
-       <option>10:00</option>
-       <option>10:30</option>
-       <option>11:00</option>
+       <option class="hour">10:00</option>
+       <option class="hour">10:00</option>
 
    </select>
 
