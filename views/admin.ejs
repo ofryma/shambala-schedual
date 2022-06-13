@@ -1,0 +1,44 @@
+<%- include('header') -%>
+
+
+
+<div class="card" style="width: 26rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%=Docs[0].month%></h5>
+    <h6 class="card-subtitle mb-2 text-muted"></h6>
+
+    <!-- card table -->
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Date</th>
+      <th scope="col">Hour</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% Docs.forEach(function(doc){%>
+      <tr>
+        <td scope="row"><%= doc.name %></td>
+        <td><%= doc.phone %></td>
+        <td><%= doc.month %> <%= doc.dayNumber %></td>
+        <td><%= doc.hour %></td>
+      </tr>
+    <%})%>
+
+    </tbody>
+</table>
+
+
+
+  </div>
+</div>
+
+
+
+
+<%- include('footer') -%>

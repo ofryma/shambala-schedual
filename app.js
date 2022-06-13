@@ -10,6 +10,38 @@ const app = express();
 app.set('view engine', 'ejs');
 const d = new Date();
 
+function validatePhone(phone_number){
+
+  return phone_number;
+}
+function arrangeCard(list){
+  // arrange by hours
+  for(let j=0 ; j < 30*4 ; j++){
+    for(let i=0; i<list.length-1 ; i++){
+        if(Number(list[i].hour[0] + list[i].hour[1])>Number(list[i+1].hour[0] + list[i+1].hour[1])){
+          list = swap(i,i+1,list);
+        }
+    }
+
+  }
+  // arrange by days:
+  for(let j=0 ; j < 30*4 ; j++){
+    for(let i=0; i<list.length -1 ; i++){
+        if(Number(list[i].dayNumber)>Number(list[i+1].dayNumber)){
+          list = swap(i,i+1,list);
+        }
+    }
+
+  }
+
+  return list;
+}
+function swap(i,j,list){
+  let temp = list[j];
+  list[j] = list[i];
+  list[i] = temp;
+  return list;
+}
 function getTodayData(){
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -152,24 +184,19 @@ const Reserv = mongoose.model('Reservation', reservSchema);
 
 
 
-// var day = new Schedual({
-//   day: 'Monday',
-//   hours: ['10:30' , '11:00' , '11:30']
-// }
-// );
+app.get('/admin' ,async function(req,res){
+  // all the object in this list of docs
+  // are for the current month
+  let today = getTodayData();
+  let docs =  await Reserv.find({month: today.month}).exec();
+  arrangeCard(docs);
+  res.render('admin',{Docs: docs});
 
-// day.save(function(err , res){
-//   if(err){
-//     console.log(err);
-//   }
-// })
-
-
-
+})
 
 app.route('/')
   .get(async function(req,res){
-    findandprint();
+    // findandprint();
     let d = new Date();
     let today_data = getTodayData()
     let monthNumber =d.getMonth();
@@ -196,8 +223,8 @@ app.route('/')
   })
   .post(async function(req,res){
     let info = req.body;
-    // console.log(info);
 
+    info.phone = validatePhone(info.phone);
     var reservation = new Reserv({
       name: info.name,
       phone: info.phone,
@@ -206,15 +233,23 @@ app.route('/')
       month: info.month,
       hour: info.hour
     });
+    Reserv.find({
+      dayNumber: reservation.dayNumber,
+      month: reservation.month,
+      hour: reservation.hour
+      } ,function(err,result){
+        if(result.length == 0){
+          reservation.save(function(err,result){
+            if(err){
+              console.log('משהו קרה, הרישום לא הושלם בהצלחה' , err);
+            }
+            else{
+              console.log('הרישום בוצע בהצלחה');
+            }
+          });
+        }
+    })
 
-    reservation.save(function(err,result){
-      if(err){
-        console.log('משהו קרה, הרישום לא הושלם בהצלחה' , err);
-      }
-      else{
-        console.log('הרישום בוצע בהצלחה');
-      }
-    });
     res.redirect('/');
   });
 

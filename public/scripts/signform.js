@@ -65,12 +65,38 @@ function hideForm(){
 
 }
 
+function openForm(day_number) {
+  document.getElementById("popupForm").style.display = "block";
+  let dayNumber_input = document.getElementById('dayNumber');
+  console.log(dayNumber_input);
+  dayNumber_input.value = day_number;
+
+  let dayName_input = document.getElementById('dayName');
+  let c_day = checkDay(day_number);
+  console.log(c_day);
+  dayName_input.value = c_day;
+
+
+  let day_hours = dayHours(c_day);
+  let hour_selection = document.getElementById('hour-select');
+  // console.log(hour_selection);
+  let hour_string = '';
+  day_hours.forEach(function(hour){
+    hour_string = hour_string + '<option class="hour">' + hour + '</option>';
+  })
+  hour_selection.innerHTML = hour_string;
+
+
+}
+
 
 days_links_list = document.getElementsByClassName('days');
 
 for(let i=0 ; i < days_links_list.length ; i++){
   days_links_list[i].addEventListener("click" , function(){
-    showForm(Number(days_links_list[i].innerHTML));
+    // showForm(Number(days_links_list[i].innerHTML));
+    openForm(Number(days_links_list[i].innerHTML));
+
   })
 
 

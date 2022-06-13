@@ -24,28 +24,38 @@
 
 </div>
 
-<script src="scripts/signform.js" charset="utf-8"></script>
 
 
-<div id='main-form' class="hidden">
+  <div class="loginPopup">
+    <div class="formPopup" id="popupForm">
+      <form action="/" class="formContainer" method="post">
+        <h2>טופס הרשמה</h2>
+        <input type="text" name="name" value="" placeholder="Full Name">
+        <input type="text" name="phone" value="" placeholder="Phone Number">
+        <input id="dayNumber" type="text" name="dayNumber" value="">
+        <input type="text" name="month" value="<%= Today.monthName %>">
+        <input id="dayName" type="text" name="day" value="">
 
-  <form class="" action="/" method="post">
-    <input type="text" name="name" value="" placeholder="Full Name">
-    <input type="text" name="phone" value="" placeholder="Phone Number">
-    <input id="dayNumber" type="text" name="dayNumber" value="">
-    <input type="text" name="month" value="<%= Today.monthName %>">
-    <input id="dayName" type="text" name="day" value="">
+        <select id="hour-select" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
 
-    <select id="hour-select" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
+       </select>
 
-       <option class="hour">10:00</option>
-       <option class="hour">10:00</option>
-
-   </select>
+        <button type="submit" class="btn">Submit</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
+  </div>
 
 
-    <button type="submit" name="submit">Send</button>
+  <script>
+    function openForm() {
+      document.getElementById("popupForm").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("popupForm").style.display = "none";
+    }
+  </script>
 
-  </form>
+  <script src="scripts/signform.js" charset="utf-8"></script>
 
 </div>
