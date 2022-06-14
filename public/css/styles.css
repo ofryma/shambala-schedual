@@ -28,6 +28,19 @@ h4 {
 .day-container{
   text-align: center;
 }
+.days , .day-header{
+  text-align: center;
+  border-radius: 10px;
+}
+.days:hover{
+  color: white;
+  background-color: #AEDBCE;
+
+}
+
+.navbar{
+  background-color: #94B49F;
+}
 
 .calender{
   width: 90%;

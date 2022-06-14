@@ -1,23 +1,59 @@
 <div class="calender">
 
   <div class="month">
-    <h1><%= Today.monthName %><br><span style="font-size:18px">2022</span></h1>
+
   </div>
 
+  <nav class="navbar">
+    <form class="" action="/prev" method="post">
+      <button id="prev-btn" type="button" name="prev" onclick="sub_one()"><</button>
+    </form>
+    <h1 id="month-title"><%= Today.monthName %></h1>
+    <h3 id="year-title">2022</h3>
+    <form class="" action="/next" method="post">
+      <button id="next-btn" type="button" name="next" onclick="add_one()">></button>
+    </form>
+  </nav>
+
   <table class="table">
-      <%- include('tablehead') -%>
-  <tbody>
+    <%- include('tablehead') -%>
 
-    <tr>
+    <h6 id="cur_month" class="hidden"><%= Today.monthNumber %></h6>
+    <tbody id="calender-board">
+      <tr>
+
+            <%let count = 0 ;%>
+            <%for(let i = 0 ; i < Today.firstDayOfMonth ; i++){%>
+              <th class=""></th>
+              <%count++;%>
+
+            <%}%>
 
 
-        <%- include('day') -%>
+            <% for(let i = 1 ; i < Today.daysInThisMonth + 1 ; i++){ %>
+
+                <%if(count==7){%>
+                  <%count=0%>
+                <%}%>
+                <%if(count==0){%>
+                  </tr>
+                  <tr>
+                <%}%>
+
+                <div class="day-container">
+                    <th class=""><h4 class="days" href=""><%=i%></h4></th>
+                </div>
 
 
-    </tr>
+
+                <%count++%>
+            <%}%>
 
 
-  </tbody>
+      </tr>
+
+
+    </tbody>
   </table>
 
 
@@ -26,36 +62,38 @@
 
 
 
-  <div class="loginPopup">
-    <div class="formPopup" id="popupForm">
-      <form action="/" class="formContainer" method="post">
-        <h2>טופס הרשמה</h2>
-        <input type="text" name="name" value="" placeholder="Full Name">
-        <input type="text" name="phone" value="" placeholder="Phone Number">
-        <input id="dayNumber" type="text" name="dayNumber" value="">
-        <input type="text" name="month" value="<%= Today.monthName %>">
-        <input id="dayName" type="text" name="day" value="">
+<div class="loginPopup">
+  <div class="formPopup" id="popupForm">
+    <form action="/" class="formContainer" method="post">
+      <h2>טופס הרשמה</h2>
+      <input type="text" name="name" value="" placeholder="Full Name">
+      <input type="text" name="phone" value="" placeholder="Phone Number">
+      <input id="dayNumber-input" type="text" name="dayNumber" value="">
+      <input id="month-input" type="text" name="month" value="">
+      <input id="dayName-input" type="text" name="day" value="">
 
-        <select id="hour-select" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
+      <select id="hour-select" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="hour">
 
-       </select>
+      </select>
 
-        <button type="submit" class="btn">Submit</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-      </form>
-    </div>
+      <button type="submit" class="btn">Submit</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
   </div>
+</div>
 
 
-  <script>
-    function openForm() {
-      document.getElementById("popupForm").style.display = "block";
-    }
-    function closeForm() {
-      document.getElementById("popupForm").style.display = "none";
-    }
-  </script>
+<script>
+  function openForm() {
+    document.getElementById("popupForm").style.display = "block";
+  }
 
-  <script src="scripts/signform.js" charset="utf-8"></script>
+  function closeForm() {
+    document.getElementById("popupForm").style.display = "none";
+  }
+</script>
+
+
+<script src="scripts/create_calender.js" charset="utf-8"></script>
 
 </div>

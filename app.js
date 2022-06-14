@@ -46,6 +46,7 @@ function getTodayData(){
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const d = new Date();
+
   let this_month = month[d.getMonth()];
   let this_day = weekday[d.getDay()];
   let this_year = String(d.getFullYear());
@@ -199,13 +200,13 @@ app.route('/')
     // findandprint();
     let d = new Date();
     let today_data = getTodayData()
-    let monthNumber =d.getMonth();
+    let monthNumber = d.getMonth();
+
 
     let today = {
-      dayName: today_data.day,
-      dayInWeek: d.getDay(),
-      todayDate: d.getDate(),
-
+      // dayName: today_data.day,
+      // dayInWeek: d.getDay(),
+      // todayDate: d.getDate(),
 
       monthNumber: monthNumber,
       monthName: today_data.month,
