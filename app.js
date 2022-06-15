@@ -147,13 +147,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // DB setup
 const database_name = "reservDB";
-mongoose.connect('mongodb://localhost:27017/' + database_name);
+mongoose.connect('mongodb+srv://admin-ofry:OfrY218790@stagecluster.8sdmq.mongodb.net/' + database_name);
 
-// const monthSchema = new mongoose.Schema({
-//   day: String,
-//   hours: [String]
-// });
-// const Schedual = mongoose.model('Schedual', monthSchema);
+
 const reservSchema = new mongoose.Schema({
   name: {
     type: String,

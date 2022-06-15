@@ -1,3 +1,39 @@
+@keyframes day_background_color {
+  from {
+    background-color: transparent;
+    color: black;}
+  to {
+    background-color: #AEDBCE;
+    color: white;}
+}
+@keyframes black_to_white {
+  from {color: black;}
+  to {color: white;}
+}
+@keyframes white_to_black {
+  from {color: white;}
+  to {color: black;}
+}
+
+.days:hover{
+  background-color: #AEDBCE;
+  color: white;
+  cursor: pointer;
+  animation-name: day_background_color;
+  animation-duration: 0.3s;
+
+}
+
+#jump-to-today:hover{
+  color: white;
+  animation-name: black_to_white;
+  animation-duration: 0.5s;
+}
+
+#jump-to-today{
+  color: black;
+}
+
 body {
   font-family: Verdana, sans-serif;
   align-items: center;
@@ -38,12 +74,7 @@ h4 {
   border-radius: 10px;
   cursor: default;
 }
-.days:hover{
-  color: white;
-  background-color: #AEDBCE;
-  cursor: pointer;
 
-}
 
 .title{
   text-align: center;
