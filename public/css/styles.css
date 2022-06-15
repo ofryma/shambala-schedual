@@ -77,15 +77,18 @@ h4 {
   background-position: center;
 }
 
-th{
-  vertical-align: center;
-}
 .day-container{
   text-align: center;
 }
-.days , .day-header{
+.days ,{
   position: relative;
   top: 40%;
+  text-align: center;
+  font-size: 1.7rem;
+  border-radius: 10px;
+  cursor: default;
+}
+.day-header{
   text-align: center;
   font-size: 1.7rem;
   border-radius: 10px;
