@@ -60,6 +60,8 @@ h4 {
 #prev-btn , #next-btn{
   border-width: 0;
   background-color: transparent;
+  width: 200px;
+  height: 100%;
 }
 
 /* Month header */
@@ -75,13 +77,17 @@ h4 {
   background-position: center;
 }
 
+th{
+  vertical-align: center;
+}
 .day-container{
   text-align: center;
 }
 .days , .day-header{
-  height: 100%;
+  position: relative;
+  top: 40%;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   border-radius: 10px;
   cursor: default;
 }
@@ -188,6 +194,9 @@ h4 {
   display: inline-block;
   cursor: pointer;
 }
+.formContainer input{
+
+}
 
 /* The actual popup (appears on top) */
 .popup .popuptext {
@@ -262,22 +271,26 @@ h4 {
 }
 .formPopup {
   display: none;
+  background-color: white;
   position: fixed;
-  left: 45%;
+  left: 50%;
   top: 5%;
+  bottom: 600px;
   transform: translate(-50%, 5%);
   border: 3px solid #999999;
   z-index: 9;
 }
 .formContainer {
-  max-width: 300px;
+  /* max-width: 600px; */
+  width: 700px;
+  height: 600px;
   padding: 20px;
   background-color: #fff;
 }
 .formContainer input[type=text],
 .formContainer input[type=password] {
   width: 100%;
-  height: 1rem;
+  height: 3rem;
   padding: 15px;
   margin: 5px 0 20px 0;
   border: none;
