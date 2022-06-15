@@ -189,12 +189,25 @@ app.get('/admin' ,async function(req,res){
   // all the object in this list of docs
   // are for the current month
   let today = getTodayData();
+  // only for this month
   let docs =  await Reserv.find({month: today.month}).exec();
   arrangeCard(docs);
+
+
+  // all
+  let all_docs =  await Reserv.find({}).exec();
+
   res.render('admin',{Docs: docs});
 
 })
-
+app.post('/admin' ,function(req,res){
+  let info = req.body;
+  Reserv.deleteOne(info,function(err,result){
+    if(err){console.log(err);}
+    else{console.log(info.name , ':deleted');}
+  })
+  res.redirect('/admin');
+})
 app.route('/')
   .get(async function(req,res){
     // findandprint();
@@ -217,13 +230,12 @@ app.route('/')
       firstDayOfMonth: getFirstDayOfMonth(d.getFullYear(),monthNumber)
     }
 
-
-
     // let docs =  await Schedual.find({}).exec();
-    res.render("index",{Today: today});
+    res.render("index",{Msg: ''});
   })
   .post(async function(req,res){
     let info = req.body;
+
 
     info.phone = validatePhone(info.phone);
     var reservation = new Reserv({
@@ -239,19 +251,28 @@ app.route('/')
       month: reservation.month,
       hour: reservation.hour
       } ,function(err,result){
+
         if(result.length == 0){
           reservation.save(function(err,result){
+            var msg ='';
             if(err){
-              console.log('משהו קרה, הרישום לא הושלם בהצלחה' , err);
+              msg = 'משהו קרה, הרישום לא הושלם בהצלחה';
+              console.log(err);
             }
             else{
-              console.log('הרישום בוצע בהצלחה');
+              msg = 'הרישום בוצע בהצלחה';
+              // console.log('הרישום בוצע בהצלחה');
             }
+            res.render('index',{Msg: msg});
           });
+        }else{
+          var msg = 'נראה ששעה זו תפוסה, אולי נסו שעה אחרת';
+          res.render('index',{Msg: msg});
         }
+
     })
 
-    res.redirect('/');
+
   });
 
 

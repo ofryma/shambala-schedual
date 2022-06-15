@@ -12,6 +12,11 @@ h4 {
   font-size: 1rem;
 }
 
+#prev-btn , #next-btn{
+  border-width: 0;
+  background-color: transparent;
+}
+
 /* Month header */
 .month {
   /* padding: 70px 25px; */
@@ -31,12 +36,23 @@ h4 {
 .days , .day-header{
   text-align: center;
   border-radius: 10px;
+  cursor: default;
 }
 .days:hover{
   color: white;
   background-color: #AEDBCE;
+  cursor: pointer;
 
 }
+
+.title{
+  text-align: center;
+  width: 100px;
+}
+#month-title , #year-title{
+  cursor: default;
+}
+
 
 .navbar{
   background-color: #94B49F;
@@ -45,7 +61,10 @@ h4 {
 .calender{
   width: 90%;
   height: 100%;
+  padding-top: 15px;
   margin: auto;
+  border-width: medium;
+  border-color: black;
 }
 
 /* Month list */
@@ -83,11 +102,32 @@ h4 {
 .hours li {
   font-size: 80%;
 }
+.remove-button{
+  background-color: transparent;
+  border-width: 0;
+  color: red;
+}
+
+
+#hour-select{
+  width: 100%;
+  margin-bottom: 9px;
+}
 
 /* Days (1-31) */
 .days {
   padding: 10px 0;
   margin: 0;
+}
+.today{
+  border-radius: 10px;
+  background-color: #F2EBE9;
+  color: black;
+}
+.card{
+  margin: auto;
+  padding-top: 15px;
+  width: 100%;
 }
 
 /* .days li {

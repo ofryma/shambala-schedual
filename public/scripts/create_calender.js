@@ -4,6 +4,28 @@ function getDaysInMonth(monthNumber){
       daysInMonth = new Date(year, monthNumber + 1, 0).getDate();
       return daysInMonth;
 }
+function getTodayData(){
+  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const d = new Date();
+
+  let day_num = d.getDay();
+  let month_num = d.getMonth();
+  let day_in_month = d.getDate();
+  let this_month = month[month_num];
+  let this_day = weekday[day_num];
+  let this_year = String(d.getFullYear());
+
+  let today = {
+    day: this_day,
+    dayNumber: String(day_num),
+    dayInMonth: day_in_month,
+    month: this_month,
+    monthNumber: String(month_num),
+    year: this_year
+  }
+  return today
+}
 function monthName(monthNumber){
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   return month[monthNumber];
@@ -57,28 +79,21 @@ function plotCalender(monthNumber,year){
       new_html = new_html + '</tr><tr scope="row">'
     }
 
-    new_html = new_html + '<div class="day-container"><th class=""><h4 class="days" href="">' + i + '</h4></th></div>'
+    new_html = new_html + '<div class="day-container"><th class=""><h4 class="days'
+    let today = getTodayData();
+
+    if(String(today.dayInMonth) == String(i) && today.monthNumber == String(monthNumber) && today.year == year){
+      new_html = new_html + ' today" ';
+    }else{
+      new_html = new_html + '" ';
+    }
+    new_html = new_html + 'href="">' + i + '</h4></th></div>'
     count++;
   }
 
   board.innerHTML = new_html;
   eventListeners();
 
-}
-function getTodayData(){
-  const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const d = new Date();
-  let this_month = month[d.getMonth()];
-  let this_day = weekday[d.getDay()];
-  let this_year = String(d.getFullYear());
-
-  let today = {
-    day: this_day,
-    month: this_month,
-    year: this_year
-  }
-  return today
 }
 function checkDay(dayNumber,month,year){
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -159,9 +174,16 @@ function openForm(day_number) {
 
 
 }
+function closeForm() {
+  document.getElementById("popupForm").style.display = "none";
+}
+function setTitle(month,year,monthNumber){
+  document.getElementById('month-title').innerHTML = month;
+  document.getElementById('year-title').innerHTML = year;
+  document.getElementById('cur_month').innerHTML = monthNumber;
+}
 function eventListeners(){
   days_links_list = document.getElementsByClassName('days');
-
   for(let i=0 ; i < days_links_list.length ; i++){
     days_links_list[i].addEventListener("click" , function(){
       // showForm(Number(days_links_list[i].innerHTML));
@@ -171,4 +193,7 @@ function eventListeners(){
   }
 }
 
+let today = getTodayData();
+setTitle(today.month,today.year,today.monthNumber);
+plotCalender(today.monthNumber , today.year);
 eventListeners();

@@ -1,5 +1,13 @@
 <%- include("header") -%>
 
+<h1 id="message" class="hidden"><%=Msg%></h1>
+<script type="text/javascript">
+  let msg = document.getElementById('message').innerHTML;
+  if(!msg==''){
+      alert(msg);
+  }
+
+</script>
 <%- include("calender") -%>
 
 
