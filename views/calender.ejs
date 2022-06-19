@@ -1,14 +1,28 @@
 <div class="calender">
 
   <nav class="navbar">
+
+
     <form class="" action="/prev" method="post">
       <button id="prev-btn" type="button" name="prev" onclick="sub_one()"><i class="fa-solid fa-angle-left"></i></button>
     </form>
+
+
+
+
     <a id="jump-to-today" href="/"><i class="fa-solid fa-calendar-day"></i></a>
+
+    <a class="navbar-brand logo" href="/">
+      <img src="css/shamballa-logo.jpeg" alt="..." height="150px">
+    </a>
+
+
     <div class="title">
       <h1 id="month-title"></h1>
       <h3 id="year-title"></h3>
     </div>
+
+
 
     <form class="" action="/next" method="post">
       <button id="next-btn" type="button" name="next" onclick="add_one()"><i class="fa-solid fa-angle-right"></i></button>

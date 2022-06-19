@@ -44,6 +44,22 @@ body {
   height: 100%;
 }
 
+.bg{
+  background-image: url("background-cover.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo{
+  background-image: url("shamballa-logo.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .table{
   height: 80%;
 }
