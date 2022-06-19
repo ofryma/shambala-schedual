@@ -15,6 +15,13 @@
   to {color: black;}
 }
 
+.rtl{
+  direction: rtl;
+}
+.description{
+  padding: 20px 20px 20px 20px;
+}
+
 .days:hover{
   background-color: #AEDBCE;
   color: white;
@@ -45,7 +52,7 @@ body {
 }
 
 .bg{
-  background-image: url("background-cover.jpg");
+  background-image: url("background-cover-long.png");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -75,9 +82,14 @@ h4 {
 
 #prev-btn , #next-btn{
   border-width: 0;
+  font-size: 30px;
   background-color: transparent;
-  width: 200px;
+  width: 50px;
   height: 100%;
+}
+
+#prev-btn:hover , #next-btn:hover{
+  color: white;
 }
 
 /* Month header */
