@@ -15,6 +15,17 @@
   to {color: black;}
 }
 
+.col1{
+  width: 50%;
+  float: left;
+}
+
+@media only screen and (max-width: 768px){
+  .col1{
+    width: 100%;
+  }
+}
+
 .rtl{
   direction: rtl;
 }
