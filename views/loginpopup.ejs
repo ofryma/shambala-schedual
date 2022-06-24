@@ -1,7 +1,19 @@
 <div class="loginPopup">
   <div class="formPopup" id="popupForm">
     <form action="/" class="formContainer" method="post">
-      <h2>Sign Form</h2>
+
+      <div class="">
+        <div class="right">
+          <button type="button" class="btn cancel" onclick="closeForm()">X</button>
+        </div>
+        <div class="form-title">
+            <h2>Sign Form</h2>
+        </div>
+
+      </div>
+
+
+
       <input type="text" name="name" value="" placeholder="Full Name">
       <input type="text" name="phone" value="" placeholder="Phone Number">
       <input id="dayNumber-input" type="text" name="dayNumber" value="">
@@ -13,7 +25,6 @@
       </select>
 
       <button type="submit" class="btn">Submit</button>
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
 </div>

@@ -14,6 +14,10 @@
   from {color: white;}
   to {color: black;}
 }
+@keyframes logo_big{
+  from {height: 100px;}
+  to {height: 110px;}
+}
 
 .col1{
   width: 50%;
@@ -33,6 +37,7 @@
 }
 
 #prev-btn , #next-btn{
+  color: black;
   border-width: 0;
   font-size: 30px;
   background-color: transparent;
@@ -408,8 +413,22 @@ h4 {
 }
 .formContainer .cancel {
   background-color: #cc0000;
+  height: 50px;
+}
+.right{
+  float: right;
 }
 .formContainer .btn:hover,
 .openButton:hover {
   opacity: 1;
+}
+
+#admin-reservations{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.card{
+  width: 70%;
 }
