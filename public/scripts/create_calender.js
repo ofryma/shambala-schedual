@@ -108,13 +108,13 @@ function dayHours(dayName){
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   var hours = [];
   if(dayName==weekday[1]){
-    hours = ['10:00' , '11:00' , '12:00' , '13:00' ];
+    hours = ['17:30' , '18:00' , '19:00' , '20:00' ];
   }
   if(dayName==weekday[3]){
-    hours = ['16:00' , '17:00' , '18:00' , '19:00' ];
+    hours = ['17:30' , '18:00' , '19:00' , '20:00' ];
   }
   if(dayName==weekday[5]){
-    hours = ['10:00' , '11:00' , '12:00' , '13:00' ];
+    hours = ['10:30' , '11:00' , '12:00' , '13:00' ];
   }
   return hours;
 }
