@@ -131,8 +131,11 @@ body {
   background-color: #DBBCAD;
   line-height: 1.9rem;
 }
+
+/* navbar */
+
 .brand-title{
-  color: white;
+  color: black;
 }
 
 .navbar-brand{
