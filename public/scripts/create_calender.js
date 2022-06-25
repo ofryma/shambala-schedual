@@ -83,10 +83,12 @@ function plotCalender(monthNumber,year){
     let today = getTodayData();
 
     if(String(today.dayInMonth) == String(i) && today.monthNumber == String(monthNumber) && today.year == year){
-      new_html = new_html + ' today" ';
-    }else{
-      new_html = new_html + '" ';
+      new_html = new_html + ' today ';
     }
+    if(dayHours(dayName(count)).length > 0){
+      new_html = new_html + ' day-active ';
+    }
+    new_html = new_html + '" ';
     new_html = new_html + 'href="">' + i + '</h4></th></div>'
     count++;
   }
@@ -107,15 +109,29 @@ function checkDay(dayNumber,month,year){
 function dayHours(dayName){
   const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   var hours = [];
+
+  if(dayName==weekday[0]){
+    hours = [];
+  }
   if(dayName==weekday[1]){
     hours = ['17:30' , '18:00' , '19:00' , '20:00' ];
+  }
+  if(dayName==weekday[2]){
+    hours = [];
   }
   if(dayName==weekday[3]){
     hours = ['17:30' , '18:00' , '19:00' , '20:00' ];
   }
+  if(dayName==weekday[4]){
+    hours = [];
+  }
   if(dayName==weekday[5]){
     hours = ['10:30' , '11:00' , '12:00' , '13:00' ];
   }
+  if(dayName==weekday[6]){
+    hours = [];
+  }
+
   return hours;
 }
 function showForm(day_number){
@@ -183,7 +199,7 @@ function setTitle(month,year,monthNumber){
   document.getElementById('cur_month').innerHTML = monthNumber;
 }
 function eventListeners(){
-  days_links_list = document.getElementsByClassName('days');
+  days_links_list = document.getElementsByClassName('day-active');
   for(let i=0 ; i < days_links_list.length ; i++){
     days_links_list[i].addEventListener("click" , function(){
       // showForm(Number(days_links_list[i].innerHTML));
@@ -192,7 +208,10 @@ function eventListeners(){
     })
   }
 }
-
+function dayName(dayNum){
+  const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  return weekday[dayNum];
+}
 let today = getTodayData();
 setTitle(today.month,today.year,today.monthNumber);
 plotCalender(today.monthNumber , today.year);
